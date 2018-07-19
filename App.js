@@ -1,12 +1,30 @@
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { Component } from 'react';
+import { Provider } from 'react-redux';
+import { createStore, applyMiddleware } from 'redux';
+import ReduxThunk from 'redux-thunk';
+import { AppFontLoader, GA } from './src/utils';
+import { NativeRouter, Route } from 'react-router-native';
+import { ScreenHit } from 'expo-analytics';
+
+import Main from './src/containers/Main';
+import reducers from './src/reducers';
 
 export default class App extends React.Component {
+  componentDidMount() {
+    GA.hit(new ScreenHit('EA-Main'));
+  }
+
   render() {
     return (
-      <View style={styles.container}>
-        <Text>Open up App.js to start working on your app!</Text>
-      </View>
+      <AppFontLoader>
+        <Provider
+          store={createStore(reducers, {}, applyMiddleware(ReduxThunk))}
+        >
+          <NativeRouter>
+            <Route component={Main} />
+          </NativeRouter>
+        </Provider>
+      </AppFontLoader>
     );
   }
 }
@@ -16,6 +34,6 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
     alignItems: 'center',
-    justifyContent: 'center',
-  },
+    justifyContent: 'center'
+  }
 });

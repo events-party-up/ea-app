@@ -1,12 +1,12 @@
 {
   "expo": {
-    "name": "ea-app",
-    "description": "This project is really great.",
+    "name": "EA",
+    "description": "Events and Adventures",
     "slug": "ea-app",
     "privacy": "public",
     "sdkVersion": "28.0.0",
     "platforms": ["ios", "android"],
-    "version": "1.0.0",
+    "version": "0.0.1",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "splash": {
@@ -17,9 +17,7 @@
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true
     }
