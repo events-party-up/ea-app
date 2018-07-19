@@ -1,0 +1,25 @@
+Login Screen
+
+Main Screen
+	Calendar View
+		Day View
+
+	List View
+
+	Map View
+	   	Show Events on map with icon showing "how soon" it will occur & icon for category?
+		Event Detail Pop-Up
+
+
+My Events
+	List
+	-> Event Details
+
+Event Details
+	Schedule Event
+
+Event Photo Viewer
+
+My Profile
+
+GA integration
