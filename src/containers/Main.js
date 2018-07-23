@@ -3,18 +3,19 @@ import { View, StyleSheet } from 'react-native';
 import { Route } from 'react-router-native';
 
 import AnimatedSwitch from '../utils/AnimatedSwitch';
-import { LoginScreen } from './user/LoginScreen';
+import LoginScreen from './user/LoginScreen';
+import EventsScreen from './events/EventsScreen';
 
-export default class Main extends Component {
+class Main extends Component {
   render() {
+    const loggedIn = this.props.user.loggedIn ? <Redirect to="/login" /> : null;
+
     return (
       <View style={styles.container}>
+        {loggedIn}
         <AnimatedSwitch {...this.props} exact>
-          <Route exact path="/" component={LoginScreen} />
-          {/* <Route path="/vehicle" component={ServiceHome} />
-          <Route path="/csl" component={CSLHome} />
-          <Route path="/sap" component={SAPHome} />
-          <Route path="/fitment" component={FitmentFlow} /> */}
+          <Route path="/events" component={EventsScreen} />
+          <Route path="/login" component={LoginScreen} />
         </AnimatedSwitch>
       </View>
     );
@@ -29,3 +30,9 @@ const styles = StyleSheet.create({
     justifyContent: 'center'
   }
 });
+
+const mapStateToProps = state => state;
+
+const mapDispatchToProps = {}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Main)

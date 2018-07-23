@@ -1,18 +1,37 @@
 import React, { Component } from 'react'
-import { ImageBackground, TouchableOpacity, Text, TextInput, View } from 'react-native'
-import PropTypes from 'prop-types'
+import { Alert, ImageBackground, TouchableOpacity, Text, TextInput, View } from 'react-native'
 import { connect } from 'react-redux'
+import { Redirect } from 'react-router-native';
+
 import { SCREEN_WIDTH, SCREEN_HEIGHT } from '../../utils';
+import { doLogin } from './userActions';
 
 const BACKGROUND_IMG = require('../../../assets/login_background.png');
 
-export class LoginScreen extends Component {
+class LoginScreen extends Component {
     state = {
         username: '',
         password: ''
     }
 
+    handleLogin = () => {
+        if (this.state.username && this.state.password) {
+            this.props.doLogin(this.state);
+            this.props.history.push('/events');
+        } else {
+            Alert.alert(
+                'Input Needed',
+                'Please input your username and password.',
+                [
+                    { text: 'OK', onPress: () => console.log('OK Pressed') },
+                ],
+                { cancelable: false }
+            )
+        }
+    }
+
     render() {
+
         return (
             <ImageBackground
                 resizeMode="contain"
@@ -32,7 +51,7 @@ export class LoginScreen extends Component {
                         secureTextEntry
                         onChangeText={text => this.setState({ password: text })}
                         value={this.state.password} />
-                    <TouchableOpacity>
+                    <TouchableOpacity onPress={this.handleLogin}>
                         <Text style={styles.loginButton}>Login</Text>
                     </TouchableOpacity>
                 </View>
@@ -62,7 +81,7 @@ const styles = {
 const mapStateToProps = state => state;
 
 const mapDispatchToProps = {
-
+    doLogin
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(LoginScreen)
