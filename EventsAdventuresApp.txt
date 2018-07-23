@@ -1,6 +1,6 @@
 Login Screen
 
-Main Screen
+Events Screen
 	Calendar View
 		Day View
 

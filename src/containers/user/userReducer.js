@@ -1,8 +1,9 @@
 import * as c from './userConstants';
 
 export const defaultState = {
-  userName: '',
+  username: '',
   fullName: '',
+  loginStatus: '',
   loggedIn: false
 };
 
@@ -11,7 +12,7 @@ export default function userReducer(state = defaultState, action) {
     case c.USER_LOGIN:
       return {
         ...state,
-        userName: action.userName,
+        username: action.username,
         fullName: action.fullName,
         loginStatus: 'success',
         loggedIn: true
@@ -19,7 +20,7 @@ export default function userReducer(state = defaultState, action) {
     case c.USER_LOGIN_FAILURE:
       return {
         ...state,
-        userName: action.userName,
+        username: action.username,
         fullName: '',
         loginStatus: action.error,
         loggedIn: false

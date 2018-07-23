@@ -1,2 +1,2 @@
-# ea-app
+# ea
 Events and Adventures
