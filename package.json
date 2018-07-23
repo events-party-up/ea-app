@@ -1,13 +1,27 @@
 {
-  "main": "node_modules/expo/AppEntry.js",
+  "name": "ea",
+  "version": "0.0.1",
   "private": true,
+  "scripts": {
+    "start": "node node_modules/react-native/local-cli/cli.js start",
+    "server": "react-native start --verbose",
+    "emulator": "react-native run-android --no-packager",
+    "bundle": "react-native bundle --platform android --dev false --entry-file index.js --bundle-output android/app/src/main/assets/index.android.bundle --assets-dest android/app/src/main/res",
+    "release": "cd android && ./gradlew assembleRelease",
+    "install-android": "adb install -r ./android/app/build/outputs/apk/app-release.apk",
+    "test": "jest"
+  },
   "dependencies": {
-    "expo": "^28.0.0",
-    "react": "16.3.1",
-    "react-native": "https://github.com/expo/react-native/archive/sdk-28.0.0.tar.gz",
-    "react-redux": "^5.0.7",
-    "react-router-native": "^4.3.0",
-    "redux": "^4.0.0",
-    "redux-thunk": "^2.3.0"
+    "react": "16.4.1",
+    "react-native": "0.56.0"
+  },
+  "devDependencies": {
+    "babel-jest": "23.4.0",
+    "babel-preset-react-native": "5.0.2",
+    "jest": "23.4.1",
+    "react-test-renderer": "16.4.1"
+  },
+  "jest": {
+    "preset": "react-native"
   }
 }
