@@ -1,13 +1,15 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow
- */
+import React, { Component } from 'react';
+import { Platform, StyleSheet, Text, View } from 'react-native';
+import { NativeRouter, Route, Switch } from 'react-router-native';
+import { Provider } from 'react-redux';
+import { applyMiddleware } from 'redux';
+import ReduxThunk from 'redux-thunk';
+import Reactotron from 'reactotron-react-native';
 
-import React, {Component} from 'react';
-import {Platform, StyleSheet, Text, View} from 'react-native';
+import reducers from './src/reducers';
+import './src/utils/reactotron';
+
+import Main from './src/containers/Main';
 
 const instructions = Platform.select({
   ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
@@ -16,15 +18,20 @@ const instructions = Platform.select({
     'Shake or press menu button for dev menu',
 });
 
-type Props = {};
-export default class App extends Component<Props> {
+export default class App extends Component {
   render() {
     return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>Welcome to React Native!</Text>
-        <Text style={styles.instructions}>To get started, edit App.js</Text>
-        <Text style={styles.instructions}>{instructions}</Text>
-      </View>
+      <Provider
+        store={Reactotron.createStore(
+          reducers,
+          {},
+          applyMiddleware(ReduxThunk)
+        )}
+      >
+        <NativeRouter>
+          <Route path="/" component={Main} />
+        </NativeRouter>
+      </Provider>
     );
   }
 }

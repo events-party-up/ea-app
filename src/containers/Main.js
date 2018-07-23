@@ -3,6 +3,7 @@ import { View, StyleSheet } from 'react-native';
 import { Route } from 'react-router-native';
 
 import AnimatedSwitch from '../utils/AnimatedSwitch';
+import { LoginScreen } from './user/LoginScreen';
 
 export default class Main extends Component {
   render() {
