@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { View, StyleSheet } from 'react-native';
 import { Route } from 'react-router-native';
+import { connect } from 'react-redux';
 
 import AnimatedSwitch from '../utils/AnimatedSwitch';
 import LoginScreen from './user/LoginScreen';
@@ -14,7 +15,7 @@ class Main extends Component {
       <View style={styles.container}>
         {loggedIn}
         <AnimatedSwitch {...this.props} exact>
-          <Route path="/events" component={EventsScreen} />
+          <Route path="/" component={EventsScreen} />
           <Route path="/login" component={LoginScreen} />
         </AnimatedSwitch>
       </View>
@@ -33,6 +34,9 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = state => state;
 
-const mapDispatchToProps = {}
+const mapDispatchToProps = {};
 
-export default connect(mapStateToProps, mapDispatchToProps)(Main)
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Main);

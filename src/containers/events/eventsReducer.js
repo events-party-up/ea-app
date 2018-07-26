@@ -1,7 +1,9 @@
 import * as c from './eventsConstants';
 
+import { EVENTS_BASIC } from '../../../mock/events';
+
 export const defaultState = {
-  events: []
+  eventList: EVENTS_BASIC
 };
 
 export default function eventsReducer(state = defaultState, action) {
@@ -9,7 +11,7 @@ export default function eventsReducer(state = defaultState, action) {
     case c.LOAD_EVENTS:
       return {
         ...state,
-        events: action.events
+        eventList: action.events
       };
 
     default:
