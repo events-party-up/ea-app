@@ -19,7 +19,7 @@ const styles = {
   container: { flexDirection: 'row' },
   title: {
     marginLeft: 10,
-    fontSize: 18,
+    fontSize: 16,
     width: 200
   }
 };

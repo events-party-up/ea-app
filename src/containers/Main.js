@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import AnimatedSwitch from '../utils/AnimatedSwitch';
 import LoginScreen from './user/LoginScreen';
 import EventsScreen from './events/EventsScreen';
+import { SCREEN_WIDTH, SCREEN_HEIGHT } from '../utils';
 
 class Main extends Component {
   render() {
@@ -25,7 +26,8 @@ class Main extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    width: SCREEN_WIDTH,
+    height: SCREEN_HEIGHT,
     backgroundColor: 'white',
     alignItems: 'center',
     justifyContent: 'center'
