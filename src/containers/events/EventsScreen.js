@@ -56,9 +56,9 @@ class EventsScreen extends Component {
         //   // initially selected day
         // selected={'2012-05-16'}
         //   // Max amount of months allowed to scroll to the past. Default = 50
-        pastScrollRange={0}
+        // pastScrollRange={1}
         //   // Max amount of months allowed to scroll to the future. Default = 50
-        futureScrollRange={1}
+        // futureScrollRange={1}
         //   // specify how each item should be rendered in agenda
         renderItem={(item, firstItemInDay) => {
           return <EventAgenda event={item} />;

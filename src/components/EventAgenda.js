@@ -16,7 +16,11 @@ export default class EventAgenda extends Component {
 }
 
 const styles = {
-  container: { flexDirection: 'row' },
+  container: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
   title: {
     marginLeft: 10,
     fontSize: 16,
