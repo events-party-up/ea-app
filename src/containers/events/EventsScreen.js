@@ -1,71 +1,117 @@
 import React, { Component } from 'react';
-import { View, Text } from 'react-native';
+import { Text, View } from 'react-native';
 import { connect } from 'react-redux';
 import { Calendar, CalendarList, Agenda } from 'react-native-calendars';
+import { SCREEN_WIDTH, SCREEN_HEIGHT, dateStrForDate } from '../../utils';
+import EventAgenda from '../../components/EventAgenda';
 
 class EventsScreen extends Component {
   render() {
     // Create an array of marked date entries
-    const markedDates = this.props.events.eventList.map(event => {
+    const eventDatesArray = this.props.events.eventList.map(event => {
       const date = new Date(event.date);
 
       // create marked date object for this date
       return {
-        [`${date.getFullYear()}-${('0' + (date.getMonth() + 1)).slice(-2)}-${(
-          '0' + date.getDate()
-        ).slice(-2)}`]: {
-          marked: true
-        }
+        [dateStrForDate(date)]: [event]
       };
     });
 
-    // console.log('markedDates=', markedDates);
+    // console.log('eventDatesArray=', eventDatesArray);
 
     // Then convert it into an object of marked dates
-    const markedDateObj = markedDates.reduce(
+    const agendaItems = eventDatesArray.reduce(
       (obj, item) => ({ ...obj, ...item }),
       {}
     );
 
-    // console.log('markedDateObj=', markedDateObj);
+    const today = new Date();
+    const todayStr = dateStrForDate(today);
+
+    if (!agendaItems[todayStr]) {
+      agendaItems[todayStr] = [];
+    }
+
+    console.log('agendaItems=', agendaItems);
 
     return (
-      <View>
-        <Text> Events Screen </Text>
-        <Calendar
-          // Initially visible month. Default = Date()
-          // Minimum date that can be selected, dates before minDate will be grayed out. Default = undefined
-          // TODO set min/max dates
-          //   minDate={'2012-05-10'}
-          // Maximum date that can be selected, dates after maxDate will be grayed out. Default = undefined
-          //   maxDate={'2012-05-30'}
-          // Handler which gets executed on day press. Default = undefined
-
-          markedDates={markedDateObj}
-          onDayPress={day => {
-            console.log('selected day', day);
+      <View style={styles.mainContainer}>
+        <Text style={styles.title}>Events</Text>
+        <Agenda
+          items={agendaItems}
+          //   loadItemsForMonth={month => {
+          //     console.log('trigger items loading');
+          //   }}
+          //   // callback that fires when the calendar is opened or closed
+          //   onCalendarToggled={calendarOpened => {
+          //     console.log(calendarOpened);
+          //   }}
+          //   // callback that gets called on day press
+          //   onDayPress={day => {
+          //     console.log('day pressed');
+          //   }}
+          //   // callback that gets called when day changes while scrolling agenda list
+          //   onDayChange={day => {
+          //     console.log('day changed');
+          //   }}
+          //   // initially selected day
+          // selected={'2012-05-16'}
+          //   // Max amount of months allowed to scroll to the past. Default = 50
+          pastScrollRange={0}
+          //   // Max amount of months allowed to scroll to the future. Default = 50
+          futureScrollRange={1}
+          //   // specify how each item should be rendered in agenda
+          renderItem={(item, firstItemInDay) => {
+            return <EventAgenda event={item} />;
           }}
-          // Handler which gets executed on day long press. Default = undefined
-          onDayLongPress={day => {
-            console.log('selected day', day);
+          //   // specify how each date should be rendered. day can be undefined if the item is not first in that day.
+          //   renderDay={(day, item) => {
+          //     return <View />;
+          //   }}
+          //   // specify how empty date content with no items should be rendered
+          renderEmptyDate={() => {
+            return <View />;
           }}
-          // Month format in calendar title. Formatting values: http://arshaw.com/xdate/#Formatting
-          monthFormat={'MMM yyyy'}
-          // Handler which gets executed when visible month changes in calendar. Default = undefined
-          onMonthChange={month => {
-            console.log('month changed', month);
+          renderEmptyData={() => {
+            return <View />;
           }}
-          // Do not show days of other months in month page. Default = false
-          hideExtraDays={true}
-          // Handler which gets executed when press arrow icon left. It receive a callback can go back month
-          onPressArrowLeft={substractMonth => substractMonth()}
-          // Handler which gets executed when press arrow icon left. It receive a callback can go next month
-          onPressArrowRight={addMonth => addMonth()}
+          //   // specify how agenda knob should look like
+          //   renderKnob={() => {
+          //     return <View />;
+          //   }}
+          //   // specify what should be rendered instead of ActivityIndicator
+          renderEmptyData={() => {
+            return <View />;
+          }}
+          // specify your item comparison function for increased performance
+          rowHasChanged={(r1, r2) => {
+            return r1.text !== r2.text;
+          }}
+          //   // By default, agenda dates are marked if they have at least one item, but you can override this if needed
+          //   markedDates={{
+          //     '2012-05-16': { selected: true, marked: true },
+          //     '2012-05-17': { marked: true },
+          //     '2012-05-18': { disabled: true }
+          //   }}
+          // If provided, a standard RefreshControl will be added for "Pull to Refresh" functionality. Make sure to also set the refreshing prop correctly.
+          onRefresh={() => console.log('refreshing...')}
+          // Set this true while waiting for new data from a refresh
+          refreshing={false}
+          // Add a custom RefreshControl component, used to provide pull-to-refresh functionality for the ScrollView.
+          refreshControl={null}
         />
       </View>
     );
   }
 }
+
+const styles = {
+  mainContainer: {
+    width: SCREEN_WIDTH,
+    height: SCREEN_HEIGHT,
+    marginTop: 30
+  }
+};
 
 const mapStateToProps = state => state;
 
