@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 
 import AnimatedSwitch from '../utils/AnimatedSwitch';
 import LoginScreen from './user/LoginScreen';
+import EventsMap from './events/EventsMap';
 import EventsScreen from './events/EventsScreen';
 import { SCREEN_WIDTH, SCREEN_HEIGHT } from '../utils';
 
@@ -16,6 +17,7 @@ class Main extends Component {
       <View style={styles.container}>
         {loggedIn}
         <AnimatedSwitch {...this.props} exact>
+          <Route path="/" component={EventsMap} />
           <Route path="/" component={EventsScreen} />
           <Route path="/login" component={LoginScreen} />
         </AnimatedSwitch>
