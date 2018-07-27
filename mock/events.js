@@ -2,7 +2,7 @@ export const EVENTS_DETAILS = [
   {
     id: '1',
     title: 'International Eats - Ukraine',
-    date: '2018-07-27T18:30:00.000Z',
+    date: '2018-07-29T18:30:00.000Z',
     imageUrl:
       'https://singles.eventsandadventures.com/images/calendar/4th%20of%20July-2016-10-15-12-04-40-MeggieRoberts.jpg',
     location: {
