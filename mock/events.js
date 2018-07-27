@@ -16,7 +16,7 @@ export const EVENTS_DETAILS = [
   {
     id: '2',
     title: 'Just for Fun Sand Volleyball (West Valley)',
-    date: '2018-07-28T19:00:00.000Z',
+    date: '2018-08-28T19:00:00.000Z',
     imageUrl:
       'https://singles.eventsandadventures.com/images/dallas/4th%20of%20July-2015-04-13-03-26-56-MarybethWillcox.jpg',
 
