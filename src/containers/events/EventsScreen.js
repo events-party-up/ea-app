@@ -99,9 +99,6 @@ class EventsScreen extends Component {
 const styles = {
   agenda: {
     width: SCREEN_WIDTH,
-    height: SCREEN_HEIGHT,
-    borderWidth: 2,
-    borderColor: 'blue',
     flex: 1
   },
   title: {

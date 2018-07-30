@@ -37,3 +37,17 @@ export const colorForDate = date => {
 export const dateToView = date => {
   return moment(date).format('LL');
 };
+
+export const COLORS = {
+  gray: '#d8d8d8',
+  darkGray: '#bfbfbf',
+  buttonGray: '#999999',
+  buttonBackgroundGray: '#eeeeee',
+  transparentGray: '#9D9D9DFF',
+  blue: '#3483DE',
+  red: '#ED1C34',
+  orange: '#F7A01D',
+  yellow: '#f6d11e',
+  lightGreen: '#85c340',
+  green: '#4dba82'
+};
