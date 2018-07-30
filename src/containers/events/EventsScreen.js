@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
-import { Text, View } from 'react-native';
+import { View } from 'react-native';
 import { connect } from 'react-redux';
-import { Calendar, CalendarList, Agenda } from 'react-native-calendars';
+import { Agenda } from 'react-native-calendars';
 import { SCREEN_WIDTH, SCREEN_HEIGHT, dateStrForDate } from '../../utils';
+import { BackButton, Route } from 'react-router-native';
 import EventAgenda from '../../components/EventAgenda';
+import EventButtonBar from '../../components/EventButtonBar';
 
 class EventsScreen extends Component {
   render() {
@@ -35,63 +37,68 @@ class EventsScreen extends Component {
     console.log('agendaItems=', agendaItems);
 
     return (
-      <Agenda
-        style={styles.agenda}
-        items={agendaItems}
-        loadItemsForMonth={month => {
-          console.log('trigger items loading');
-        }}
-        //   // callback that fires when the calendar is opened or closed
-        //   onCalendarToggled={calendarOpened => {
-        //     console.log(calendarOpened);
-        //   }}
-        //   // callback that gets called on day press
-        //   onDayPress={day => {
-        //     console.log('day pressed');
-        //   }}
-        //   // callback that gets called when day changes while scrolling agenda list
-        //   onDayChange={day => {
-        //     console.log('day changed');
-        //   }}
-        //   // initially selected day
-        // selected={'2012-05-16'}
-        //   // Max amount of months allowed to scroll to the past. Default = 50
-        // pastScrollRange={1}
-        //   // Max amount of months allowed to scroll to the future. Default = 50
-        // futureScrollRange={1}
-        //   // specify how each item should be rendered in agenda
-        renderItem={(item, firstItemInDay) => {
-          return <EventAgenda event={item} />;
-        }}
-        //   // specify how empty date content with no items should be rendered
-        renderEmptyDate={() => {
-          return <View />;
-        }}
-        //   // specify how agenda knob should look like
-        //   renderKnob={() => {
-        //     return <View />;
-        //   }}
-        //   // specify what should be rendered instead of ActivityIndicator
-        renderEmptyData={() => {
-          return <View />;
-        }}
-        // specify your item comparison function for increased performance
-        rowHasChanged={(r1, r2) => {
-          return r1.text !== r2.text;
-        }}
-        //   // By default, agenda dates are marked if they have at least one item, but you can override this if needed
-        //   markedDates={{
-        //     '2012-05-16': { selected: true, marked: true },
-        //     '2012-05-17': { marked: true },
-        //     '2012-05-18': { disabled: true }
-        //   }}
-        // If provided, a standard RefreshControl will be added for "Pull to Refresh" functionality. Make sure to also set the refreshing prop correctly.
-        onRefresh={() => console.log('refreshing...')}
-        // Set this true while waiting for new data from a refresh
-        refreshing={false}
-        // Add a custom RefreshControl component, used to provide pull-to-refresh functionality for the ScrollView.
-        refreshControl={null}
-      />
+      <View style={styles.container}>
+        <BackButton />
+
+        <Route component={EventButtonBar} />
+        <Agenda
+          style={styles.agenda}
+          items={agendaItems}
+          loadItemsForMonth={month => {
+            console.log('trigger items loading');
+          }}
+          //   // callback that fires when the calendar is opened or closed
+          //   onCalendarToggled={calendarOpened => {
+          //     console.log(calendarOpened);
+          //   }}
+          //   // callback that gets called on day press
+          //   onDayPress={day => {
+          //     console.log('day pressed');
+          //   }}
+          //   // callback that gets called when day changes while scrolling agenda list
+          //   onDayChange={day => {
+          //     console.log('day changed');
+          //   }}
+          //   // initially selected day
+          // selected={'2012-05-16'}
+          //   // Max amount of months allowed to scroll to the past. Default = 50
+          // pastScrollRange={1}
+          //   // Max amount of months allowed to scroll to the future. Default = 50
+          // futureScrollRange={1}
+          //   // specify how each item should be rendered in agenda
+          renderItem={(item, firstItemInDay) => {
+            return <EventAgenda event={item} />;
+          }}
+          //   // specify how empty date content with no items should be rendered
+          renderEmptyDate={() => {
+            return <View />;
+          }}
+          //   // specify how agenda knob should look like
+          //   renderKnob={() => {
+          //     return <View />;
+          //   }}
+          //   // specify what should be rendered instead of ActivityIndicator
+          renderEmptyData={() => {
+            return <View />;
+          }}
+          // specify your item comparison function for increased performance
+          rowHasChanged={(r1, r2) => {
+            return r1.text !== r2.text;
+          }}
+          //   // By default, agenda dates are marked if they have at least one item, but you can override this if needed
+          //   markedDates={{
+          //     '2012-05-16': { selected: true, marked: true },
+          //     '2012-05-17': { marked: true },
+          //     '2012-05-18': { disabled: true }
+          //   }}
+          // If provided, a standard RefreshControl will be added for "Pull to Refresh" functionality. Make sure to also set the refreshing prop correctly.
+          onRefresh={() => console.log('refreshing...')}
+          // Set this true while waiting for new data from a refresh
+          refreshing={false}
+          // Add a custom RefreshControl component, used to provide pull-to-refresh functionality for the ScrollView.
+          refreshControl={null}
+        />
+      </View>
     );
   }
 }
@@ -101,10 +108,12 @@ const styles = {
     width: SCREEN_WIDTH,
     flex: 1
   },
-  title: {
-    fontSize: 20,
-    textAlign: 'center'
-  }
+  container: {
+    width: SCREEN_WIDTH,
+    height: SCREEN_HEIGHT,
+    justifyContent: 'space-between',
+    alignItems: 'center'
+  },
 };
 
 const mapStateToProps = state => state;

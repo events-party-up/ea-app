@@ -2,8 +2,10 @@ import React, { Component } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { connect } from 'react-redux';
 import MapView, { Marker } from 'react-native-maps';
+import { BackButton, Route } from 'react-router-native';
 
 import { colorForDate, SCREEN_WIDTH, SCREEN_HEIGHT } from '../../utils';
+import EventButtonBar from '../../components/EventButtonBar';
 
 class EventsMap extends Component {
   // TODO set defaults based on member city
@@ -34,6 +36,8 @@ class EventsMap extends Component {
 
     return (
       <View style={styles.container}>
+        <BackButton />
+        <Route component={EventButtonBar} />
         <MapView style={styles.map} region={this.state}>
           {markers}
         </MapView>
@@ -46,11 +50,14 @@ const styles = StyleSheet.create({
   container: {
     height: 500,
     width: SCREEN_WIDTH,
-    justifyContent: 'flex-end',
-    alignItems: 'center'
+    height: SCREEN_HEIGHT,
+    alignItems: 'center',
+    justifyContent: 'space-between',
   },
   map: {
-    ...StyleSheet.absoluteFillObject
+    width: SCREEN_WIDTH,
+    height: 300,
+    flex: 1
   }
 });
 
