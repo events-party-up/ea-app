@@ -40,16 +40,19 @@ class EventsScreen extends Component {
           style={styles.agenda}
           items={agendaItems}
           loadItemsForMonth={month => {
-            console.log('trigger items loading');
+            // console.log('trigger items loading', month);
           }}
           //   // callback that fires when the calendar is opened or closed
           //   onCalendarToggled={calendarOpened => {
           //     console.log(calendarOpened);
           //   }}
           //   // callback that gets called on day press
-          //   onDayPress={day => {
-          //     console.log('day pressed');
-          //   }}
+          onDayPress={day => {
+            if (!agendaItems[day.dateString]) {
+              agendaItems[day.dateString] = [];
+            }
+            // console.log('day pressed', day);
+          }}
           //   // callback that gets called when day changes while scrolling agenda list
           //   onDayChange={day => {
           //     console.log('day changed');
@@ -87,7 +90,7 @@ class EventsScreen extends Component {
           //     '2012-05-18': { disabled: true }
           //   }}
           // If provided, a standard RefreshControl will be added for "Pull to Refresh" functionality. Make sure to also set the refreshing prop correctly.
-          onRefresh={() => console.log('refreshing...')}
+          // onRefresh={() => console.log('refreshing...')}
           // Set this true while waiting for new data from a refresh
           refreshing={false}
           // Add a custom RefreshControl component, used to provide pull-to-refresh functionality for the ScrollView.
