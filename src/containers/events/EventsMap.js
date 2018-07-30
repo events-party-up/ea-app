@@ -8,8 +8,8 @@ import { colorForDate, SCREEN_WIDTH, SCREEN_HEIGHT } from '../../utils';
 class EventsMap extends Component {
   // TODO set defaults based on member city
   state = {
-    latitude: 33.67,
-    longitude: -111.924,
+    latitude: 33.4876217,
+    longitude: -112.0678541,
     latitudeDelta: 0.5,
     longitudeDelta: 0.5
   };

@@ -32,7 +32,7 @@ class EventsScreen extends Component {
       agendaItems[todayStr] = [];
     }
 
-    console.log('agendaItems=', agendaItems);
+    // console.log('agendaItems=', agendaItems);
 
     return (
       <View style={styles.container}>
