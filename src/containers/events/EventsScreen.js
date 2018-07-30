@@ -3,9 +3,7 @@ import { View } from 'react-native';
 import { connect } from 'react-redux';
 import { Agenda } from 'react-native-calendars';
 import { SCREEN_WIDTH, SCREEN_HEIGHT, dateStrForDate } from '../../utils';
-import { BackButton, Route } from 'react-router-native';
 import EventAgenda from '../../components/EventAgenda';
-import EventButtonBar from '../../components/EventButtonBar';
 
 class EventsScreen extends Component {
   render() {
@@ -38,9 +36,6 @@ class EventsScreen extends Component {
 
     return (
       <View style={styles.container}>
-        <BackButton />
-
-        <Route component={EventButtonBar} />
         <Agenda
           style={styles.agenda}
           items={agendaItems}

@@ -23,7 +23,6 @@ class EventButtonBar extends Component {
             <View style={styles.buttonContainer}>
                 <Link
                     to="/events/map"
-                    replace
                     component={TouchableOpacity}
                 >
                     <Text style={[styles.buttonText, mapButtonStyle]}>Map</Text>

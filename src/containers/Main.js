@@ -1,13 +1,24 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import { Redirect, Route } from 'react-router-native';
+import { BackButton, Redirect, Route } from 'react-router-native';
 import { connect } from 'react-redux';
 
-import AnimatedSwitch, { ANIMATE_FADE } from '../utils/AnimatedSwitch';
+import AnimatedSwitch from '../utils/AnimatedSwitch';
 import LoginScreen from './user/LoginScreen';
 import EventsMap from './events/EventsMap';
 import EventsScreen from './events/EventsScreen';
 import { COLORS, SCREEN_WIDTH, SCREEN_HEIGHT } from '../utils';
+import EventButtonBar from '../components/EventButtonBar';
+
+const SLIDE_ANIMATION = {
+  type: 'spring',
+  init: {
+    fromValue: 0,
+    toValue: 1,
+    duration: 300,
+    useNativeDriver: true
+  }
+}
 
 class Main extends Component {
   render() {
@@ -17,8 +28,10 @@ class Main extends Component {
     return (
       <View style={styles.container}>
         {loggedIn}
+        <Route component={EventButtonBar} />
+        <BackButton />
 
-        <AnimatedSwitch {...this.props} animationType={ANIMATE_FADE} exact>
+        <AnimatedSwitch {...this.props} animationSetup={SLIDE_ANIMATION} exact>
           <Route path="/events/map" component={EventsMap} />
           <Route path="/events/calendar" component={EventsScreen} />
           <Route path="/login" component={LoginScreen} />
@@ -35,7 +48,7 @@ const styles = StyleSheet.create({
     height: SCREEN_HEIGHT,
     backgroundColor: 'white',
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'space-between',
   },
 });
 
